@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brainroots - Steal a Brainroot</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    margin: 16px 0 20px 0;
+    font-size: 28px;
+    color: #ff4040;
+    text-shadow: 0 0 10px #ff4040;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 120px;
+    grid-gap: 6px;
+    width: 90%;
+    max-width: 1000px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 100px; /* espacio para el botón */
+  }
+
+  .card {
+    background: linear-gradient(145deg, #1a0d0d, #2a0d0d);
+    border-radius: 8px;
+    padding: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #ff4040;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 8px #ff4040;
+  }
+
+  .card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 4px;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    background: linear-gradient(145deg, #2a0d0d, #3a0d0d);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff4040, 0 0 10px #ff1c1c;
+  }
+
+  .card.selected {
+    border-color: #ff1c1c;
+    box-shadow: 0 0 20px #ff4040, 0 0 12px #ff1c1c;
+    background: linear-gradient(145deg, #2a0d0d, #3a0d0d);
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.1;
+    color: #ffe0e0;
+    word-break: break-word;
+    text-shadow: 0 0 3px #ff4040;
+    font-weight: bold;
+  }
+
+  #goButton {
+    position: fixed;
+    bottom: 20px;
+    background-color: #ff4040;
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px #ff4040, 0 0 5px #ff1c1c;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: none;
+    z-index: 10;
+  }
+
+  #goButton:hover {
+    background-color: #ff1c1c;
+    box-shadow: 0 0 30px #ff4040, 0 0 15px #ff1c1c;
+    transform: scale(1.05);
+  }
+
+  #loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 3px solid #fff;
+    border-top: 3px solid #ff4040;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 500px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 100px;
+      padding-bottom: 120px;
+    }
+
+    .card img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .card p {
+      font-size: 10px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    #goButton {
+      padding: 12px 28px;
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>Steal a Brainroot</h1>
+
+<div class="grid" id="grid">
+  <div class="card"><img src="https://i.postimg.cc/d30ZcFNs/Ketupat-Kepat.png" alt="Ketupat Kepat"><p>Ketupat Kepat</p></div>
+  <div class="card"><img src="https://i.postimg.cc/V6mb4nj4/Ketchuru.png" alt="Ketchuru"><p>Ketchuru</p></div>
+  <div class="card"><img src="https://i.postimg.cc/ZqrdrVyh/Burguro-And-Fryuro.png" alt="Burguru & Fryuru"><p>Burguru & Fryuru</p></div>
+  <div class="card"><img src="https://i.postimg.cc/vZx9mQYH/Spaghetti-Tualetti.png" alt="Spaguetti Tualetti"><p>Spaguetti Tualetti</p></div>
+
+  <div class="card"><img src="https://i.postimg.cc/8P5MqRxy/Esok-Sekola.png" alt="Esok Sekola"><p>Esok Sekola</p></div>
+  <div class="card"><img src="https://i.postimg.cc/5yPvXyQm/Dragoncanneloni.png" alt="Dragon Cannelloni"><p>Dragon Cannelloni</p></div>
+  <div class="card"><img src="https://i.postimg.cc/FRV0QD9b/La-Grande-Combianzione.png" alt="La Grande Combinazione"><p>La Grande Combinazione</p></div>
+  <div class="card"><img src="https://i.postimg.cc/W4rM5sxj/BROOOOOOOO.png" alt="Los Bros"><p>Los Bros</p></div>
+
+  <div class="card"><img src="https://i.postimg.cc/rwDGt1JW/Strawberryelephant.png" alt="Strawberry Elephant"><p>Strawberry Elephant</p></div>
+  <div class="card"><img src="https://i.postimg.cc/gkSqJSvp/Chicleteira.png" alt="Chicleteira Bicicleta"><p>Chicleteira Bicicleta</p></div>
+  <div class="card"><img src="https://i.postimg.cc/xTT39DNX/Spooky-And-Pumpky.png" alt="Spooky & Pumpky"><p>Spooky & Pumpky</p></div>
+  <div class="card"><img src="https://i.postimg.cc/prPY93Gr/Losmobil.png" alt="Los Mobiles"><p>Los Mobiles</p></div>
+
+  <div class="card"><img src="https://i.postimg.cc/5yJpBXtR/Eviledon.png" alt="Eviledon"><p>Eviledon</p></div>
+</div>
+
+<button id="goButton" onclick="searchServer()">SEARCHING THE SERVER
+  <div id="loader"></div>
+</button>
+
+<script>
+const cards = document.querySelectorAll('.card');
+const goButton = document.getElementById('goButton');
+const loader = document.getElementById('loader');
+const serverURL = "https://www.roblox.com/share?code=0fdd608769f2304fb32801ee1ea3c697&type=Server";
+let selectedCard = null;
+
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    if (selectedCard) selectedCard.classList.remove('selected');
+    card.classList.add('selected');
+    selectedCard = card;
+    goButton.style.display = 'inline-block';
+  });
+});
+
+function searchServer() {
+  goButton.textContent = "BUSCANDO SERVER";
+  loader.style.display = "block";
+  goButton.disabled = true;
+
+  let dots = 0;
+  const interval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    goButton.textContent = "BUSCANDO SERVER" + ".".repeat(dots);
+    goButton.appendChild(loader);
+  }, 500);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    window.location.href = serverURL;
+  }, 3000);
+}
+</script>
+</body>
+</html>
